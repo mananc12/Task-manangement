@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
+
+//using axios to communicate with backend
 import axios from "axios";
+
 import { useTaskContext } from "./TaskContext";
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
 
 const API_BASE_URL = "http://localhost:5000/api/tasks";
 function App() {
+
+  //state management
   const { tasks, addTask, updateTask, deleteTask } = useTaskContext();
 
+  //GET request to get the data from backend
   useEffect(() => {
     axios
       .get(API_BASE_URL)
@@ -18,6 +24,7 @@ function App() {
       .catch((error) => console.error(error));
   }, []);
 
+  //PATCH request for the modification
   const handleUpdateTaskStatus = (id, completed) => {
     axios
       .patch(`${API_BASE_URL}/${id}`, { completed })
@@ -27,6 +34,7 @@ function App() {
       .catch((error) => console.error(error));
   };
 
+  //DELETE request for deleting the task
   const handleDeleteTask = (id) => {
     axios
       .delete(`${API_BASE_URL}/${id}`)
@@ -34,6 +42,7 @@ function App() {
       .catch((error) => console.error(error));
   };
 
+//POST request to add a new task
   const addNewTask = (newTask) => {
     axios
       .post(API_BASE_URL, newTask)
