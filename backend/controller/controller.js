@@ -1,5 +1,6 @@
 const db = require("../db/db"); // Import the database configuration
 
+//home page logic
 const home = async (req, res) => {
   console.log("Fetching tasks...");
   try {
@@ -11,6 +12,7 @@ const home = async (req, res) => {
   }
 };
 
+//post request logic
 const post = (req, res) => {
   const { title, description } = req.body;
 
@@ -32,6 +34,8 @@ const post = (req, res) => {
   }
 };
 
+
+//patch request logic
 const patch = (req, res) => {
   const { id } = req.params;
   const { completed } = req.body;
@@ -47,6 +51,8 @@ const patch = (req, res) => {
   }
 };
 
+
+//delete request logic
 const deleteIt = (req, res) => {
   const { id } = req.params;
 
