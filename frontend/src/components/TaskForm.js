@@ -1,9 +1,9 @@
-// TaskForm.js
-
 import React, { useState } from "react";
 
 const TaskForm = ({ addNewTask }) => {
   const [newTask, setNewTask] = useState({ title: "", description: "" });
+
+  //handeling error using state
   const [titleError, setTitleError] = useState("");
   const [descError, setDescError] = useState("");
 
@@ -11,6 +11,7 @@ const TaskForm = ({ addNewTask }) => {
     setNewTask({ ...newTask, [e.target.name]: e.target.value });
   };
 
+  //validation handeling
   const handleAddTask = () => {
     try {
       if (newTask.title.trim() === "") {
@@ -18,13 +19,13 @@ const TaskForm = ({ addNewTask }) => {
         setTimeout(() => {
           setTitleError(""); // Clear any previous errors
         }, 1000);
-        return;
+        return; //using 'return' so that addNewTask can't be invoked
       } else if (newTask.description.trim() === "") {
         setDescError("Description cannot be empty"); // Fix the error message here
         setTimeout(() => {
           setDescError(""); // Clear any previous errors
         }, 1000);
-        return;
+        return; using 'return' so that addNewTask can't be invoked
       }
       addNewTask(newTask);
       setNewTask({ title: "", description: "" });
@@ -43,7 +44,7 @@ const TaskForm = ({ addNewTask }) => {
           value={newTask.title}
           onChange={handleInputChange}
         />
-        {titleError && <p className="error-message">{titleError}</p>}
+        {titleError && <p className="error-message">{titleError}</p>} //validation error-title
       </div>
       <div>
         <input
@@ -53,7 +54,7 @@ const TaskForm = ({ addNewTask }) => {
           value={newTask.description}
           onChange={handleInputChange}
         />
-        {descError && <p className="error-message">{descError}</p>}
+        {descError && <p className="error-message">{descError}</p>} //validation error-description
       </div>
       <button className="add-button" onClick={handleAddTask}>
         Add Task
